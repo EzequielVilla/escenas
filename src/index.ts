@@ -15,7 +15,8 @@ function inOutComponent(content,title){
             </div>
         </div>
         `
-    content.appendChild(componentEl);
+        content.appendChild(componentEl);
+        listener();
 }
 
 function msjComponent (content,title,text){
@@ -27,68 +28,92 @@ function msjComponent (content,title,text){
         </div>
     `
     content.appendChild(componentEl);
+    listener()
 }
 
-function handleRoute(route){
-    const optionEl = document.querySelector(".options__box");
-    optionEl.innerHTML = "";
-    console.log("ruta", route);
-    const routes =
-    [
-        {
-            path: /\/inbox/,
-            handler: () => {inOutComponent(optionEl, "Inbox")}
-        },
-        {
-            path: /\/sent/,
-            handler: () => {inOutComponent(optionEl, "Sent")}
-        },
-        {
-            path: /\/inbox\/primero/,
-            handler: () => {msjComponent(optionEl, "Inbox", "Primer mensaje del inbox")}
-        },
-        {
-            path: /\/inbox\/segundo/,
-            handler: () => {msjComponent(optionEl, "Inbox", "Segundo mensaje del inbox")}
-        },
-        {
-            path: /\/sent\/primero/,
-            handler: () => {msjComponent(optionEl, "Sent", "Primer mensaje del sent")}
-        },
-        {
-            path: /\/sent\/segundo/,
-            handler: () => {msjComponent(optionEl, "Sent", "Segundo mensaje del sent")}
-        },
-    ];
-    for (const r of routes){
-        if(r.path.test(route)){
-            r.handler();
-        }
-    }
-}
+
+
+
+
+
+
+
 
 function goTo(path){
     history.pushState({},"",path);
-    
-    handleRoute(path);
+    handleRoute(location.pathname);
 }
+
+function handleRoute(route){
+    // contador();
+    
+
+    const optionEl = document.querySelector(".options__box");
+    optionEl.innerHTML = "";
+    const routes =
+    [
+        {
+            path: /^\/inbox\/$/,
+            handler: () => {inOutComponent(optionEl, "Inbox")}
+        },
+        {
+            path: /^\/sent\/$/,
+            handler: () => {inOutComponent(optionEl, "Sent")}
+        },
+        {
+            path: /^\/inbox\/primero$/,
+            handler: () => {msjComponent(optionEl, "Inbox", "Primer mensaje del inbox")}
+        },
+        {
+            path: /^\/inbox\/segundo$/,
+            handler: () => {msjComponent(optionEl, "Inbox", "Segundo mensaje del inbox")}
+        },
+        {
+            path: /^\/sent\/primero$/,
+            handler: () => {msjComponent(optionEl, "Sent", "Primer mensaje del sent")}
+        },
+        {
+            path: /^\/sent\/segundo$/,
+            handler: () => {msjComponent(optionEl, "Sent", "Segundo mensaje del sent")}
+        },
+    ];
+    routes.find((item)=>{
+        if (item.path.test(route)){
+            item.handler();
+        }
+    });
+}
+
+
+
+function listener(){
+    const boton1 = document.querySelector(".options__box__option1__button1");
+    const boton2 = document.querySelector(".options__box__option2__button2");
+    //Emails
+    boton1.addEventListener("click", ()=>{
+
+        goTo("./primero");
+    });
+    boton2.addEventListener("click", ()=>{
+        goTo("./segundo");
+    });
+}
+
 
 function main(){
 
     
     //Comienzo
-    goTo("/inbox" );
+    goTo("/inbox/" );
     //
+    // window.addEventListener("load", ()=> {
+    //     handleRoute(location.pathname);
+    // })
     const optionEl = document.getElementById("options__box");
-    const searchEl = document.querySelector(".header__comp__buscador");
     const inboxEl = document.querySelector(".options__menu__comp__inbox");
     const sentEl = document.querySelector(".options__menu__comp__sent");
-    const boton1 = document.querySelector(".options__box__option1__button1");
-    const boton2 = document.querySelector(".options__box__option2__button2");
+    
 
-
-    //Listeners
-    //Opciones
     inboxEl.addEventListener("click", () =>{
         optionEl.style.backgroundColor =  "#FFF59B";
         goTo("/inbox/" );
@@ -98,21 +123,7 @@ function main(){
         optionEl.style.backgroundColor =  "#FF9BB3";
         goTo("/sent/");
     });
-    //Emails
-    boton1.addEventListener("click", ()=>{
-
-        console.log("BOTON1");
-        goTo("./primero");
-    });
-    boton2.addEventListener("click", ()=>{
-        console.log("BOTON2");
-        // goTo("./primero");
-    });
-    console.log(boton1);
-
-    // window.addEventListener("load", (e)=> {
-    //     console.log(location.pathname);
-    //     handleRoute(location.pathname);
-    // })
 }
+
+
 main();
