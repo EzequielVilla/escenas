@@ -4,32 +4,34 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script defer src="./components/header.ts"></script>
+        <link rel="stylesheet" href="components/header.css" />
+
+        <script defer src="./components/mailOptions.ts"></script>
+        <link rel="stylesheet" href="./components/mailOptions.css" />
+
+        <script defer src="./components/msj.ts"></script>
+        <link rel="stylesheet" href="./components/msj.css" />
+
         <script defer src="./index.ts"></script>
-        <link rel="stylesheet" href="./index.css">
+        <link rel="stylesheet" href="./index.css" />
         <title>Document</title>
     </head>
     <body>
-        <header class="header">
-            <div class="header__comp">
-                <div class="header__comp__logo">Logo</div>
-                <input type="text" class="header__comp__buscador"></input>
-                <input type="submit" class="header__comp__buscar" value="Buscar"></input>
-            </div>
-        </header>
+        <header class="header"></header>
         <section class="options">
             <section class="options__menu">
                 <div class="options__menu__comp">
-                    <button name="inbox" class="options__menu__comp__inbox">Inbox</button>
-                    <button name="inbox" class="options__menu__comp__sent">Sent</button>
+                    <button name="inbox" class="options__menu__comp__inbox">
+                        Inbox
+                    </button>
+                    <button name="inbox" class="options__menu__comp__sent">
+                        Sent
+                    </button>
                 </div>
             </section>
-            <section class="options__box" id="options__box">
-            
-            </section>
-
-
-
-
+            <section class="options__box" id="options__box"></section>
         </section>
     </body>
 </html>

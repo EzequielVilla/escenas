@@ -1,41 +1,6 @@
-
-
-function inOutComponent(content,title){
-    const componentEl = document.createElement("div");
-        componentEl.innerHTML= `
-        <div class="options__box__welcome">
-            <h2 class="options__box__title">${title}</h2>
-            <div class="options__box__option">
-                <p class="options__box__option1__txt">Un email</p> 
-                <button type="button" id="boton" class="options__box__option1__button1">ENTRAR</button>
-            </div>
-            <div class="options__box__option">
-                <p class="options__box__option2__txt">Otro email</p> 
-                <button type="button" class="options__box__option2__button2">ENTRAR</button>
-            </div>
-        </div>
-        `
-        content.appendChild(componentEl);
-        listener();
-}
-
-function msjComponent (content,title,text){
-    const componentEl = document.createElement("div");
-    componentEl.innerHTML=`
-        <div class="options__box__action">
-                    <h2 class="options__box__action__title">${title}</h2>
-                    <p class="options__box__action__txt">${text}</p>
-        </div>
-    `
-    content.appendChild(componentEl);
-    listener()
-}
-
-
-
-
-
-
+import { mailOptionsComponents } from "./components/mailOptions"; 
+import { msjComponent } from "./components/msj";
+import { headerComp } from "./components/header"; 
 
 
 
@@ -45,7 +10,7 @@ function goTo(path){
 }
 
 function handleRoute(route){
-    // contador();
+    
     
 
     const optionEl = document.querySelector(".options__box");
@@ -54,11 +19,11 @@ function handleRoute(route){
     [
         {
             path: /^\/inbox\/$/,
-            handler: () => {inOutComponent(optionEl, "Inbox")}
+            handler: () => {mailOptionsComponents(optionEl, "Inbox")}
         },
         {
             path: /^\/sent\/$/,
-            handler: () => {inOutComponent(optionEl, "Sent")}
+            handler: () => {mailOptionsComponents(optionEl, "Sent")}
         },
         {
             path: /^\/inbox\/primero$/,
@@ -102,13 +67,11 @@ function listener(){
 
 function main(){
 
-    
-    //Comienzo
+    const header = document.querySelector(".header");
+    headerComp(header);    
     goTo("/inbox/" );
-    //
-    // window.addEventListener("load", ()=> {
-    //     handleRoute(location.pathname);
-    // })
+
+    
     const optionEl = document.getElementById("options__box");
     const inboxEl = document.querySelector(".options__menu__comp__inbox");
     const sentEl = document.querySelector(".options__menu__comp__sent");
@@ -127,3 +90,6 @@ function main(){
 
 
 main();
+
+
+export {listener};
